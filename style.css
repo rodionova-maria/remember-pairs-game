@@ -8,9 +8,8 @@
 
 @font-face {
   font-family: "stratosskyeng";
-  src: url("./fonts/stratosskyengweb-regular.woff") format('woff');
+  src: url("./fonts/stratosskyengweb-regular.woff") format("woff");
 }
-
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +24,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'stratosskyeng', serif;
+  font-family: "stratosskyeng", serif;
 }
 
 .title {
@@ -46,7 +45,17 @@ body {
   color: var(--btn-text-color);
 }
 
+.hidden {
+  display: none;
+}
+
 .difficulty {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 68px;
+  margin-top: 40px;
+}
+.difficulty-screen {
   text-align: center;
   width: 480px;
   min-height: 459px;
@@ -54,15 +63,7 @@ body {
   border-radius: var(--border-radius);
   padding: 50px 70px;
 }
-
-.difficulty__nums {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 68px;
-  margin-top: 40px;
-}
-
-.difficulty__num {
+.difficulty__btn {
   width: 98px;
   height: 98px;
   font-size: 64px;
@@ -75,4 +76,11 @@ body {
   border: 0;
   border-radius: var(--border-radius);
   cursor: pointer;
+  transition: all 0.3s;
+}
+.difficulty__btn:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.difficulty__btn_selected {
+  transform: scale(1.1);
 }

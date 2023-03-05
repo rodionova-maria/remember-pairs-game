@@ -1,0 +1,53 @@
+:root {
+  --main-color: #004980;
+  --popup-background-color: #C2F5FF;
+  --btn-background-color: #7AC100;
+  --btn-text-color: #fff;
+  --border-radius: 12px;
+}
+
+@font-face {
+  font-family: "stratosskyeng";
+  src: url("./fonts/stratosskyengweb-regular.woff") format('woff');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  background: var(--main-color);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'stratosskyeng', serif;
+}
+
+.title {
+  color: var(--main-color);
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 400;
+}
+
+.btn {
+  width: 246px;
+  height: 50px;
+  font-size: 24px;
+  line-height: 32px;
+  border: 0;
+  background-color: var(--btn-background-color);
+  border-radius: var(--border-radius);
+  color: var(--btn-text-color);
+}
+
+.hidden {
+  display: none;
+}
+
+@import 'difficulty';
