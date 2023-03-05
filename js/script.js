@@ -1,4 +1,4 @@
-app = {
+const app = {
   difficulty: '',
   progress: '',
   duration: '',
