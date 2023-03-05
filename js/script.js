@@ -1,5 +1,5 @@
 const app = {
-  difficulty: '',
+  difficulty: 1,
   progress: '',
   duration: '',
   allCards: {},
