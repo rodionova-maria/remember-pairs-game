@@ -1,0 +1,36 @@
+.game {
+  &-screen {
+    width: 100%;
+    max-width: 1024px;
+    padding-top: 52px;
+    padding-bottom: 49px;
+    padding-left: 26px;
+    padding-right: 23px;
+  }
+
+  &__panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 46px;
+
+    &-timer {
+      font-family: 'StratosSkyeng';
+      font-size: 64px;
+      line-height: 72px;
+      color: #FFFFFF;
+    }
+  }
+
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    &-item {
+      background-image: url(./images/card.png);
+      width: 95px;
+      height: 133px;
+    }
+  }
+}

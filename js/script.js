@@ -1,3 +1,6 @@
+const CARD_SUITS = ['hearts', 'diamonds', 'spades', 'clubs'];
+const CARD_VALUE = ['A', 'K', 'Q', 'J', 10, 9, 8, 7, 6];
+
 const app = {
   difficulty: 1,
   progress: '',
@@ -29,4 +32,13 @@ difficulty.addEventListener('click', (event) => {
 btnStart.addEventListener('click', () => {
   difficultyScreen.classList.add('hidden');
   gameScreen.classList.remove('hidden');
+  const game__cards = document.querySelector('.game__cards');
+  CARD_SUITS.forEach(suite => {
+    CARD_VALUE.forEach(value => {
+      const card = document.createElement('div');
+      card.classList.add('game__cards-item', suite, value);
+      game__cards.appendChild(card);
+      app.allCards[suite] = value;
+    });
+  });
 });

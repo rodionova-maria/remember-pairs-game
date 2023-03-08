@@ -7,7 +7,7 @@
 }
 
 @font-face {
-  font-family: "stratosskyeng";
+  font-family: "StratosSkyeng";
   src: url("./fonts/stratosskyengweb-regular.woff") format('woff');
 }
 
@@ -25,7 +25,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'stratosskyeng', serif;
+  font-family: 'StratosSkyeng', serif;
 }
 
 .title {
@@ -51,3 +51,4 @@ body {
 }
 
 @import 'difficulty';
+@import 'play';
