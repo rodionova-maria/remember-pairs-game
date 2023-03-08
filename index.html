@@ -11,16 +11,21 @@
 
 <body>
 
-  <div class="difficulty">
+  <div class="difficulty-screen">
     <h2 class="title">Выбери сложность</h2>
-    <div class="difficulty__nums">
-      <button class="difficulty__num">1</button>
-      <button class="difficulty__num">2</button>
-      <button class="difficulty__num">3</button>
+    <div class="difficulty">
+      <button class="difficulty__btn" data-value="1">1</button>
+      <button class="difficulty__btn" data-value="2">2</button>
+      <button class="difficulty__btn" data-value="3">3</button>
     </div>
-    <button class="btn">Старт</button>
+    <button class="btn btn-start">Старт</button>
   </div>
 
+  <div class="game-screen hidden">
+    <h1>Экран карт</h1>
+  </div>
+
+  <script src="./js/script.js"></script>
 </body>
 
 </html>
