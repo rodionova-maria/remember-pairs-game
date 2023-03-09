@@ -110,8 +110,3 @@ body {
   flex-wrap: wrap;
   gap: 15px;
 }
-.game__cards-item {
-  background-image: url(./images/card.png);
-  width: 95px;
-  height: 133px;
-}
