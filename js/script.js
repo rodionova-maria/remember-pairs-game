@@ -79,7 +79,7 @@ const generateCards = (difLevel) => {
 const hideCards = () => {
   const cards = gameScreen.querySelectorAll('.card');
   cards.forEach((card) => {
-    card.src = '../images/shirt.svg';
+    card.src = './images/shirt.svg';
   });
 };
 
@@ -94,7 +94,7 @@ const renderCards = () => {
     const card = document.createElement('img');
     card.classList.add('card');
     card.setAttribute('data-id', id);
-    card.src = `../images/${ALL_CARDS[id]}`;
+    card.src = `./images/${ALL_CARDS[id]}`;
     cards.appendChild(card);
   });
 };
