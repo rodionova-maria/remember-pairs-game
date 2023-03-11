@@ -1,0 +1,31 @@
+body {
+  background: var(--main-color);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-common), sans-serif;
+}
+
+.title {
+  color: var(--main-color);
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 400;
+}
+
+.btn {
+  width: 246px;
+  height: 50px;
+  font-size: 24px;
+  line-height: 32px;
+  border: 0;
+  background-color: var(--btn-background-color);
+  border-radius: var(--border-radius);
+  color: var(--btn-text-color);
+}
+
+.hidden {
+  display: none;
+}
