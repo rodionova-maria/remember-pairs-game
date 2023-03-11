@@ -127,8 +127,8 @@ btnStart.addEventListener('click', () => {
   }
 
   const showHide5sec = () => {
-    clearInterval(timer);
     app.duration = `${mins}.${secs}`;
+    clearInterval(timer);
     gameTimer.innerHTML = '0.00';
     renderCards();
     setTimeout(function () {
