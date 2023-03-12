@@ -1,0 +1,27 @@
+.game {
+  &-screen {
+    width: 100%;
+    max-width: 1024px;
+    padding: 52px 23px 49px 26px;
+  }
+
+  &__panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 46px;
+
+    &-timer {
+      font-family: var(--font-family-common), sans-serif;
+      font-size: 64px;
+      line-height: 72px;
+      color: #fff;
+    }
+  }
+
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}

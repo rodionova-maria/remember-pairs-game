@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Выбери все пары карт</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Выбери все пары карт</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-  <div class="difficulty-screen">
-    <h2 class="title">Выбери сложность</h2>
-    <div class="difficulty">
-      <button class="difficulty__btn" data-value="1">1</button>
-      <button class="difficulty__btn" data-value="2">2</button>
-      <button class="difficulty__btn" data-value="3">3</button>
+  <body>
+    <div class="difficulty-screen">
+      <h2 class="title">Выбери сложность</h2>
+      <div class="difficulty">
+        <button class="difficulty__btn" data-value="3">1</button>
+        <button class="difficulty__btn" data-value="4">2</button>
+        <button class="difficulty__btn" data-value="5">3</button>
+      </div>
+      <button class="btn btn-start">Старт</button>
     </div>
-    <button class="btn btn-start">Старт</button>
-  </div>
 
-  <div class="game-screen hidden">
-    <h1>Экран карт</h1>
-  </div>
+    <div class="game-screen hidden">
+      <div class="game__panel">
+        <div class="game__panel-timer">0.00</div>
+        <button class="btn btn-reset">Начать заново</button>
+      </div>
+      <div class="game__cards"></div>
+    </div>
 
-  <script src="./js/script.js"></script>
-</body>
-
+    <script src="./js/script.js"></script>
+  </body>
 </html>

@@ -1,13 +1,14 @@
 :root {
   --main-color: #004980;
-  --popup-background-color: #C2F5FF;
-  --btn-background-color: #7AC100;
+  --popup-background-color: #c2f5ff;
+  --btn-background-color: #7ac100;
   --btn-text-color: #fff;
   --border-radius: 12px;
+  --font-family-common: "StratosSkyeng";
 }
 
 @font-face {
-  font-family: "stratosskyeng";
+  font-family: var(--font-family-common), sans-serif;
   src: url("./fonts/stratosskyengweb-regular.woff") format("woff");
 }
 * {
@@ -24,7 +25,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "stratosskyeng", serif;
+  font-family: var(--font-family-common), sans-serif;
 }
 
 .title {
@@ -69,7 +70,7 @@ body {
   font-size: 64px;
   line-height: 72px;
   background-color: #fff;
-  color: #0080C1;
+  color: #0080c1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,4 +84,27 @@ body {
 }
 .difficulty__btn_selected {
   transform: scale(1.1);
+}
+
+.game-screen {
+  width: 100%;
+  max-width: 1024px;
+  padding: 52px 23px 49px 26px;
+}
+.game__panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 46px;
+}
+.game__panel-timer {
+  font-family: var(--font-family-common), sans-serif;
+  font-size: 64px;
+  line-height: 72px;
+  color: #fff;
+}
+.game__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }

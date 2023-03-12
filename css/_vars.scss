@@ -1,0 +1,20 @@
+:root {
+  --main-color: #004980;
+  --popup-background-color: #c2f5ff;
+  --btn-background-color: #7ac100;
+  --btn-text-color: #fff;
+  --border-radius: 12px;
+  --font-family-common: 'StratosSkyeng';
+}
+
+@font-face {
+  font-family: var(--font-family-common), sans-serif;
+  src: url('./fonts/stratosskyengweb-regular.woff') format('woff');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
