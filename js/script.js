@@ -1,3 +1,8 @@
+import '../css/vars.scss';
+import '../css/main.scss';
+import '../css/difficulty.scss';
+import '../css/play.scss';
+
 let ALL_CARDS = [
   'hearts-6.svg',
   'hearts-7.svg',
@@ -41,7 +46,7 @@ const app = {
   difficulty: 4,
   duration: '',
   generatedCards: [],
-  selectedCards: {},
+  selectedCards: [],
 };
 
 const difficultyScreen = document.querySelector('.difficulty-screen');
@@ -79,7 +84,7 @@ const generateCards = (difLevel) => {
 const hideCards = () => {
   const cards = gameScreen.querySelectorAll('.card');
   cards.forEach((card) => {
-    card.src = './images/shirt.svg';
+    card.src = './static/shirt.svg';
   });
 };
 
@@ -88,14 +93,39 @@ const mix = (array) => {
 };
 
 const renderCards = () => {
+  app.selectedCards = [];
+  let clicksCounter = 0;
   const cards = gameScreen.querySelector('.game__cards');
   cards.innerHTML = '';
   app.generatedCards.forEach((id) => {
     const card = document.createElement('img');
     card.classList.add('card');
     card.setAttribute('data-id', id);
-    card.src = `./images/${ALL_CARDS[id]}`;
+    card.src = `./static/${ALL_CARDS[id]}`;
     cards.appendChild(card);
+
+    function cardClickHandler() {
+      this.src = `./static/${ALL_CARDS[id]}`;
+      if (clicksCounter % 2 === 0) {
+        app.selectedCards.push(id);
+        clicksCounter++;
+      } else {
+        if (app.selectedCards[app.selectedCards.length - 1] !== id) {
+          clearInterval(app.timer);
+          alert('Игра окончена! Вы проиграли.');
+        } else {
+          app.selectedCards.push(id);
+          clicksCounter++;
+        }
+      }
+      if (app.selectedCards.length === app.generatedCards.length) {
+        clearInterval(app.timer);
+        alert('Выигрыш.');
+      }
+      this.removeEventListener('click', cardClickHandler);
+    }
+
+    card.addEventListener('click', cardClickHandler);
   });
 };
 
@@ -107,13 +137,12 @@ btnStart.addEventListener('click', () => {
 
   let secs,
     now,
-    timer,
     mins = 0;
 
   function startTimer() {
     now = Date.now();
     mins = 0;
-    timer = setInterval(function () {
+    app.timer = setInterval(function () {
       secs = Math.floor((Date.now() - now) / 1000);
       if (secs === 60) {
         now = Date.now();
@@ -128,7 +157,7 @@ btnStart.addEventListener('click', () => {
 
   const showHide5sec = () => {
     app.duration = `${mins}.${secs}`;
-    clearInterval(timer);
+    clearInterval(app.timer);
     gameTimer.innerHTML = '0.00';
     renderCards();
     setTimeout(function () {
