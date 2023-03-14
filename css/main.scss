@@ -1,3 +1,16 @@
+@font-face {
+  font-family: StratosSkyeng;
+  src: url('../fonts/stratosskyengweb-regular.woff2') format('woff2'),
+    url('../fonts/stratosskyengweb-regular.woff') format('woff');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
 body {
   background: var(--main-color);
   height: 100vh;
@@ -5,7 +18,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-family-common), sans-serif;
+  font-family: StratosSkyeng, sans-serif;
 }
 
 .title {
@@ -24,6 +37,7 @@ body {
   background-color: var(--btn-background-color);
   border-radius: var(--border-radius);
   color: var(--btn-text-color);
+  font-family: StratosSkyeng, sans-serif;
 }
 
 .hidden {
