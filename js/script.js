@@ -1,3 +1,8 @@
+import '../css/vars.scss';
+import '../css/main.scss';
+import '../css/difficulty.scss';
+import '../css/play.scss';
+
 let ALL_CARDS = [
   'hearts-6.svg',
   'hearts-7.svg',
@@ -37,18 +42,21 @@ let ALL_CARDS = [
   'clubs-ace.svg',
 ];
 
+let timeoutId = null;
+
 const app = {
   difficulty: 4,
   duration: '',
   generatedCards: [],
-  selectedCards: {},
+  selectedCards: [],
 };
 
 const difficultyScreen = document.querySelector('.difficulty-screen');
-
 const difficulty = difficultyScreen.querySelector('.difficulty');
 const difficultyButtons = difficulty.querySelectorAll('.difficulty__btn');
 const btnStart = difficultyScreen.querySelector('.btn-start');
+
+const gameScreen = document.querySelector('.game-screen');
 
 difficulty.addEventListener('click', (event) => {
   const target = event.target;
@@ -62,9 +70,25 @@ difficulty.addEventListener('click', (event) => {
   app.difficulty = +target.dataset.value;
 });
 
-const gameScreen = document.querySelector('.game-screen');
+btnStart.addEventListener('click', () => {
+  difficultyScreen.classList.add('hidden');
+  gameScreen.classList.remove('hidden');
+
+  generateCards(app.difficulty);
+  app.generatedCards = mix(app.generatedCards);
+  showHide5sec();
+
+  const btnReset = gameScreen.querySelector('.btn-reset');
+  btnReset.addEventListener('click', () => {
+    showHide5sec();
+  });
+});
 
 const getRandom = (max) => Math.floor(Math.random() * max);
+
+const mix = (array) => {
+  return (array = array.sort(() => Math.random() - 0.5));
+};
 
 const generateCards = (difLevel) => {
   do {
@@ -76,73 +100,77 @@ const generateCards = (difLevel) => {
   app.generatedCards = [...app.generatedCards, ...app.generatedCards];
 };
 
-const hideCards = () => {
+function hideCards() {
   const cards = gameScreen.querySelectorAll('.card');
   cards.forEach((card) => {
-    card.src = './images/shirt.svg';
+    card.src = './static/shirt.svg';
   });
-};
-
-const mix = (array) => {
-  return (array = array.sort(() => Math.random() - 0.5));
-};
+}
 
 const renderCards = () => {
+  app.selectedCards = [];
+  let clicksCounter = 0;
   const cards = gameScreen.querySelector('.game__cards');
   cards.innerHTML = '';
   app.generatedCards.forEach((id) => {
     const card = document.createElement('img');
     card.classList.add('card');
     card.setAttribute('data-id', id);
-    card.src = `./images/${ALL_CARDS[id]}`;
+    card.src = `./static/${ALL_CARDS[id]}`;
     cards.appendChild(card);
+
+    function cardClickHandler() {
+      this.src = `./static/${ALL_CARDS[id]}`;
+      if (clicksCounter % 2 === 0) {
+        app.selectedCards.push(id);
+        clicksCounter++;
+      } else {
+        if (app.selectedCards[app.selectedCards.length - 1] !== id) {
+          stopTimer();
+          alert('Игра окончена! Вы проиграли.');
+        } else {
+          app.selectedCards.push(id);
+          clicksCounter++;
+        }
+      }
+      if (app.selectedCards.length === app.generatedCards.length) {
+        stopTimer();
+        alert('Выигрыш.');
+      }
+      this.removeEventListener('click', cardClickHandler);
+    }
+
+    card.addEventListener('click', cardClickHandler);
   });
 };
 
-btnStart.addEventListener('click', () => {
-  difficultyScreen.classList.add('hidden');
-  gameScreen.classList.remove('hidden');
-
-  const gameTimer = gameScreen.querySelector('.game__panel-timer');
-
-  let secs,
-    now,
-    timer,
-    mins = 0;
-
-  function startTimer() {
-    now = Date.now();
-    mins = 0;
-    timer = setInterval(function () {
-      secs = Math.floor((Date.now() - now) / 1000);
-      if (secs === 60) {
-        now = Date.now();
-        mins++;
-      }
-      if (secs < 10) {
-        secs = '0' + secs;
-      }
-      gameTimer.innerHTML = mins + '.' + secs;
-    });
+function startTimer() {
+  if (timeoutId) {
+    return;
   }
-
-  const showHide5sec = () => {
-    app.duration = `${mins}.${secs}`;
-    clearInterval(timer);
-    gameTimer.innerHTML = '0.00';
-    renderCards();
-    setTimeout(function () {
-      hideCards();
-      startTimer();
-    }, 3000);
+  const gameTimer = gameScreen.querySelector('.game__panel-timer');
+  gameTimer.textContent = '0.00';
+  const startTime = new Date().getTime();
+  const run = () => {
+    const time = new Date().getTime() - startTime;
+    gameTimer.textContent = (time / 1000).toFixed(1);
+    timeoutId = window.setTimeout(run, 50);
   };
+  run();
+}
 
-  generateCards(app.difficulty);
-  app.generatedCards = mix(app.generatedCards);
-  showHide5sec();
+function stopTimer() {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+    timeoutId = null;
+  }
+}
 
-  const btnReset = gameScreen.querySelector('.btn-reset');
-  btnReset.addEventListener('click', () => {
-    showHide5sec();
-  });
-});
+function showHide5sec() {
+  stopTimer();
+  renderCards();
+  setTimeout(function () {
+    hideCards();
+    startTimer();
+  }, 3000);
+}
