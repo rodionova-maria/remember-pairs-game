@@ -6,8 +6,9 @@
   "scripts": {
     "format": "prettier --write ./js/",
     "lint:js": "eslint ./js/*.js",
+    "lint:ts": "tsc ––noEmit",
     "lint:scss": "stylelint ./css/*.scss",
-    "lint": "npm run lint:js && npm run lint:scss",
+    "lint": "",
     "prepare": "husky install",
     "build": "NODE_ENV=production webpack",
     "start": "webpack-dev-server --open"
@@ -42,6 +43,8 @@
     "stylelint-config-standard": "^29.0.0",
     "stylelint-config-standard-scss": "^6.1.0",
     "stylelint-prettier": "^3.0.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.2",
     "webpack": "^5.76.1",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"

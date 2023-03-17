@@ -1,3 +1,6 @@
+import { startTimer } from './timer';
+import { stopTimer } from './timer';
+
 import '../css/vars.scss';
 import '../css/main.scss';
 import '../css/difficulty.scss';
@@ -42,19 +45,20 @@ let ALL_CARDS = [
   'clubs-ace.svg',
 ];
 
-let timeoutId = null;
-
 const app = {
   difficulty: 4,
   duration: '',
   generatedCards: [],
   selectedCards: [],
+  timeoutId: undefined,
 };
 
 const difficultyScreen = document.querySelector('.difficulty-screen');
-const difficulty = difficultyScreen.querySelector('.difficulty');
-const difficultyButtons = difficulty.querySelectorAll('.difficulty__btn');
-const btnStart = difficultyScreen.querySelector('.btn-start');
+const difficulty: Element | null =
+  difficultyScreen.querySelector('.difficulty');
+const difficultyButtons: Element | null =
+  difficulty.querySelectorAll('.difficulty__btn');
+const btnStart: Element | null = difficultyScreen.querySelector('.btn-start');
 
 const gameScreen = document.querySelector('.game-screen');
 
@@ -84,13 +88,13 @@ btnStart.addEventListener('click', () => {
   });
 });
 
-const getRandom = (max) => Math.floor(Math.random() * max);
+const getRandom = (max: number) => Math.floor(Math.random() * max);
 
-const mix = (array) => {
+const mix = (array: string[]) => {
   return (array = array.sort(() => Math.random() - 0.5));
 };
 
-const generateCards = (difLevel) => {
+const generateCards = (difLevel: number) => {
   do {
     let randomCardId = getRandom(ALL_CARDS.length);
     if (!app.generatedCards.includes(randomCardId)) {
@@ -126,7 +130,7 @@ const renderCards = () => {
         clicksCounter++;
       } else {
         if (app.selectedCards[app.selectedCards.length - 1] !== id) {
-          stopTimer();
+          stopTimer(app.timeoutId);
           alert('Игра окончена! Вы проиграли.');
         } else {
           app.selectedCards.push(id);
@@ -134,7 +138,7 @@ const renderCards = () => {
         }
       }
       if (app.selectedCards.length === app.generatedCards.length) {
-        stopTimer();
+        stopTimer(app.timeoutId);
         alert('Выигрыш.');
       }
       this.removeEventListener('click', cardClickHandler);
@@ -143,28 +147,6 @@ const renderCards = () => {
     card.addEventListener('click', cardClickHandler);
   });
 };
-
-function startTimer() {
-  if (timeoutId) {
-    return;
-  }
-  const gameTimer = gameScreen.querySelector('.game__panel-timer');
-  gameTimer.textContent = '0.00';
-  const startTime = new Date().getTime();
-  const run = () => {
-    const time = new Date().getTime() - startTime;
-    gameTimer.textContent = (time / 1000).toFixed(1);
-    timeoutId = window.setTimeout(run, 50);
-  };
-  run();
-}
-
-function stopTimer() {
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-    timeoutId = null;
-  }
-}
 
 function showHide5sec() {
   stopTimer();
