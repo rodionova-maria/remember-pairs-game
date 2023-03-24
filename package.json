@@ -6,9 +6,9 @@
   "scripts": {
     "format": "prettier --write ./js/",
     "lint:js": "eslint ./js/*.js",
-    "lint:ts": "tsc ––noEmit",
+    "lint:ts": "tsc --noEmit",
     "lint:scss": "stylelint ./css/*.scss",
-    "lint": "npm run lint:js && npm run lint:scss",
+    "lint": "npm run lint:ts && npm run lint:scss",
     "prepare": "husky install",
     "build": "NODE_ENV=production webpack",
     "start": "webpack-dev-server --open",
