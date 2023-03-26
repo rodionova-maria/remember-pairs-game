@@ -1,6 +1,8 @@
 import { startTimer } from './timer';
 import { stopTimer } from './timer';
 import { showResult } from './result';
+import { getRandom } from './getRandom';
+import { mix } from './mix';
 
 import '../css/vars.scss';
 import '../css/main.scss';
@@ -52,7 +54,7 @@ type App = {
   duration: string | null;
   generatedCards: number[];
   selectedCards: number[];
-  status: string;
+  status: string | undefined;
 };
 
 export const app: App = {
@@ -60,7 +62,7 @@ export const app: App = {
   duration: '',
   generatedCards: [],
   selectedCards: [],
-  status: '',
+  status: undefined,
 };
 
 export const gameScreen = document.querySelector('.game-screen');
@@ -95,12 +97,6 @@ btnStart?.addEventListener('click', () => {
     showHide5sec();
   });
 });
-
-const getRandom = (max: number) => Math.floor(Math.random() * max);
-
-const mix = (array: number[]) => {
-  return (array = array.sort(() => Math.random() - 0.5));
-};
 
 const generateCards = (difLevel: number) => {
   app.generatedCards = [];
